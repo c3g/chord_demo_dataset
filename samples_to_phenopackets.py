@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
+from datetime import date
+from faker import Faker
+
+fake = Faker()
+
+
+SECONDS_IN_YEAR = 60 * 60 * 24 * 365
+
 
 def main():
     # Each phenopacket corresponds to one patient encounter.
@@ -10,10 +18,17 @@ def main():
         samples = [s.split("\t") for s in sf.readlines()]
 
     for s in samples:
+        individual_id = f"ind:{s[0]}"
+        individual_dob = fake.date_of_birth(minimum_age=20, maximum_age=100)
+        individual_age = date.today() - individual_dob
+
+        age_years = individual_age.total_seconds() // SECONDS_IN_YEAR  # Missing leap years; oh well
+        age_string = f"P{int(age_years)}Y"
+
         phenopackets.append({
             "subject": {
-                "id": s[0],
-                "date_of_birth": "TODO",  # TODO
+                "id": individual_id,
+                "date_of_birth": individual_dob.isoformat(),
                 "sex": s[1],
                 "karyotypic_sex": "XX" if s[1] == "FEMALE" else "XY",  # TODO: Spice it up a bit
             },
@@ -29,11 +44,11 @@ def main():
             "biosamples": [
                 {
                     "id": s[0],  # TODO: Different biosample ID vs subject ID
-                    "individual_id": s[0],
+                    "individual_id": individual_id,  # TODO: Do we need to provide this?
                     "description": f"Biosample for patient {s[0]}",
                     "sampled_tissue": {},  # TODO
                     "phenotypic_features": [],  # TODO
-                    "individual_age_at_collection": "",  # TODO: Calculate from DOB
+                    "individual_age_at_collection": age_string,  # TODO: Calculate from DOB
                     "histological_diagnosis": None,  # TODO
                     "tumor_progression": None,  # TODO
                     "diagnostic_markers": [],  # TODO
@@ -42,6 +57,8 @@ def main():
                 }
             ]
         })
+
+    print(phenopackets)
 
 
 if __name__ == "__main__":
