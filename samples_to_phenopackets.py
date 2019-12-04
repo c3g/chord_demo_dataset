@@ -31,13 +31,26 @@ def main():
                 "date_of_birth": individual_dob.isoformat(),
                 "sex": s[1],
                 "karyotypic_sex": "XX" if s[1] == "FEMALE" else "XY",  # TODO: Spice it up a bit
+                "taxonomy": {
+                    "id": "NCBITaxon:9606",
+                    "label": "Homo sapiens",
+                },
             },
             "phenotypic_features": [],
             "diseases": [],
             "meta_data": {
                 "created_by": "David Lougheed",
                 "submitted_by": "Ksenia Zaytseva",
-                "resources": [],
+                "resources": [
+                    {
+                        "id": "ncbi_taxonomy",
+                        "name": "NCBI Taxonomy OBO Edition",
+                        "namespace_prefix": "NCBITaxon",
+                        "url": "http://purl.obolibrary.org/obo/ncbitaxon.owl",
+                        "version": "2018-07-27",
+                        "iri_prefix": "http://purl.obolibrary.org/obo/NCBITaxon_"
+                    }
+                ],
                 "updated": [],
                 "external_references": []
             },
