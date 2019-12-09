@@ -211,6 +211,7 @@ DISEASE_STAGES = [
     }
 ]
 
+
 # TNM Finding list is derived from child terms of NCIT:C48232 (Cancer TNM Finding)
 TNM_FINDING = [
     {
@@ -222,11 +223,3 @@ TNM_FINDING = [
         "label": "Cancer TNM Finding Category"
     },
 ]
-
-
-
-
-
-
-
-
