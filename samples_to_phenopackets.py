@@ -2,6 +2,9 @@
 
 from datetime import date
 from faker import Faker
+import random
+import json
+from ontology_terms import DISEASE_TERMS, DISEASE_STAGES
 
 fake = Faker()
 
@@ -37,7 +40,12 @@ def main():
                 },
             },
             "phenotypic_features": [],
-            "diseases": [],
+            "diseases": [
+                {
+                    "term": random.choice(DISEASE_TERMS),
+                    "disease_stage": random.sample(DISEASE_STAGES, k=random.randrange(3))
+                }
+            ],
             "meta_data": {
                 "created_by": "David Lougheed",
                 "submitted_by": "Ksenia Zaytseva",
@@ -71,7 +79,7 @@ def main():
             ]
         })
 
-    print(phenopackets)
+    print(json.dumps(phenopackets, indent=2))
 
 
 if __name__ == "__main__":
