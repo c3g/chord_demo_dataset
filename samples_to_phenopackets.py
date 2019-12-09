@@ -51,6 +51,22 @@ def main():
                         "url": "http://purl.obolibrary.org/obo/ncbitaxon.owl",
                         "version": "2018-07-27",
                         "iri_prefix": "http://purl.obolibrary.org/obo/NCBITaxon_"
+                    },
+                    {
+                        "id": "uberon",
+                        "name": "Uber-anatomy ontology",
+                        "namespace_prefix": "UBERON",
+                        "url": "http://purl.obolibrary.org/obo/uberon.owl",
+                        "version": "2019-06-27",
+                        "iri_prefix": "http://purl.obolibrary.org/obo/UBERON"
+                    },
+                    {
+                        "id": "nci_thesaurus",
+                        "name": "NCI Thesaurus",
+                        "namespace_prefix": "NCIT",
+                        "url": "https://ncit.nci.nih.gov",
+                        "version": "2015-09-01",
+                        "iri_prefix": "https://ncit.nci.nih.gov"
                     }
                 ],
                 "updated": [],
