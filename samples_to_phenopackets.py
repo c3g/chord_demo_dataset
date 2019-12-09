@@ -4,7 +4,6 @@ from datetime import date
 from faker import Faker
 import random
 import json
-from ontology_terms import DISEASE_TERMS, DISEASE_STAGES, TNM_FINDING
 
 fake = Faker()
 
@@ -28,7 +27,7 @@ def main():
         age_years = individual_age.total_seconds() // SECONDS_IN_YEAR  # Missing leap years; oh well
         age_string = f"P{int(age_years)}Y"
 
-        phenopackets.append({
+        ind_phenopacket = {
             "subject": {
                 "id": individual_id,
                 "date_of_birth": individual_dob.isoformat(),
@@ -40,16 +39,7 @@ def main():
                 },
             },
             "phenotypic_features": [],
-            "diseases": [
-                {
-                    "term": random.choice(DISEASE_TERMS),
-                    "onset": {
-                        "age": f"P{int(age_years - random.randrange(0, 5))}Y"
-                    },
-                    "disease_stage": random.sample(DISEASE_STAGES, k=random.randrange(3)),
-                    "tnm_finding": random.choice(TNM_FINDING)
-                }
-            ],
+            "diseases": [],
             "meta_data": {
                 "created_by": "David Lougheed",
                 "submitted_by": "Ksenia Zaytseva",
@@ -71,18 +61,38 @@ def main():
                     "id": s[0],  # TODO: Different biosample ID vs subject ID
                     "individual_id": individual_id,  # TODO: Do we need to provide this?
                     "description": f"Biosample for patient {s[0]}",
-                    "sampled_tissue": {},  # TODO
+                    "sampled_tissue": {
+                        "id": "UBERON_0000178",
+                        "label": "blood"
+                    },
                     "phenotypic_features": [],  # TODO
                     "individual_age_at_collection": age_string,  # TODO: Calculate from DOB
                     "histological_diagnosis": None,  # TODO
                     "tumor_progression": None,  # TODO
                     "diagnostic_markers": [],  # TODO
-                    "procedure": None,  # TODO
+                    "procedure": {
+                        "code": {
+                            "id": "NCIT_C15189",
+                            "label": "Biopsy"
+                        }
+                    },
                     "is_control_sample": False
                 }
             ]
-        })
-
+        }
+        if individual_id.split(':')[1] in ['NA19648', 'NA19658', 'NA20509']:
+            ind_phenopacket["diseases"] = {
+                    "term": {
+                        "id": "NCIT:C4872",
+                        "label": "Breast Carcinoma"
+                    },
+                    "onset": {
+                        "age": f"P{int(age_years - random.randrange(0, 5))}Y"
+                    }
+                }
+        phenopackets.append(ind_phenopacket)
+    with open('data.json', 'w') as output:
+        json.dump(phenopackets, output, indent=4)
     print(json.dumps(phenopackets, indent=2))
 
 
