@@ -4,7 +4,7 @@ from datetime import date
 from faker import Faker
 import random
 import json
-from ontology_terms import DISEASE_TERMS, DISEASE_STAGES
+from ontology_terms import DISEASE_TERMS, DISEASE_STAGES, TNM_FINDING
 
 fake = Faker()
 
@@ -43,7 +43,11 @@ def main():
             "diseases": [
                 {
                     "term": random.choice(DISEASE_TERMS),
-                    "disease_stage": random.sample(DISEASE_STAGES, k=random.randrange(3))
+                    "onset": {
+                        "age": f"P{int(age_years - random.randrange(0, 5))}Y"
+                    },
+                    "disease_stage": random.sample(DISEASE_STAGES, k=random.randrange(3)),
+                    "tnm_finding": random.choice(TNM_FINDING)
                 }
             ],
             "meta_data": {
