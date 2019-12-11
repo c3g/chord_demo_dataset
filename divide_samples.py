@@ -6,13 +6,20 @@ datasets = (
     ["NA20509"],  # Male 2 with BRCA1 variant
 )
 
+exclude = (
+    "NA19648",
+    "NA19658",
+    "NA20509",
+)
+
 with open("./samples.tsv", "r") as sf:
     i = 0
     for s in sf.readlines():
-        if s in ("NA19648", "NA19658", "NA20509"):
+        sample = s.split("\t")[0]
+
+        if sample in exclude:
             continue
 
-        sample = s.split("\t")[0]
         datasets[i].append(sample)
 
         i = (i + 1) % 3
