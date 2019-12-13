@@ -96,8 +96,9 @@ def main():
                 }
             ]
         }
-        if individual_id.split(':')[1] in ['NA19648', 'NA19658', 'NA20509']:
-            ind_phenopacket["diseases"] = {
+        if individual_id.split(':')[1] == 'NA19648':
+            ind_phenopacket["diseases"] = [
+                {
                     "term": {
                         "id": "NCIT:C4872",
                         "label": "Breast Carcinoma"
@@ -106,6 +107,7 @@ def main():
                         "age": f"P{int(age_years - random.randrange(0, 5))}Y"
                     }
                 }
+            ]
         phenopackets.append(ind_phenopacket)
     with open('data.json', 'w') as output:
         json.dump(phenopackets, output, indent=4)
