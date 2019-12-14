@@ -69,7 +69,7 @@ def main():
                         "iri_prefix": "https://ncit.nci.nih.gov"
                     }
                 ],
-                "updated": [],
+                "updates": [],
                 "external_references": []
             },
             "biosamples": [
