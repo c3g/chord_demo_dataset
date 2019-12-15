@@ -11,6 +11,9 @@ from divide_samples import datasets
 
 fake = Faker()
 
+fake.seed(108643)
+random.seed(19618)
+
 
 SECONDS_IN_YEAR = 60 * 60 * 24 * 365
 
