@@ -90,7 +90,9 @@ def main():
                             "label": "blood"
                         },
                         "phenotypic_features": [],  # TODO
-                        "individual_age_at_collection": age_string,  # TODO: Calculate from DOB
+                        "individual_age_at_collection": {
+                            "age": age_string
+                        },  # TODO: Calculate from DOB
                         "histological_diagnosis": None,  # TODO
                         "tumor_progression": None,  # TODO
                         "diagnostic_markers": [],  # TODO
