@@ -8,12 +8,10 @@ from faker import Faker
 
 from divide_samples import datasets
 
-
 fake = Faker()
 
 fake.seed(108643)
 random.seed(19618)
-
 
 SECONDS_IN_YEAR = 60 * 60 * 24 * 365
 
@@ -116,6 +114,85 @@ def main():
                         },
                         "onset": {
                             "age": f"P{int(age_years - random.randrange(0, 5))}Y"
+                        }
+                    }
+                ]
+                phenotypic_feature = {
+                    "type": {
+                        "id": "HP:0012219",
+                        "label": "Erythema nodosum"
+                    },
+                    "severity": {
+                        "id": "HP: 0012825",
+                        "label": "Mild"
+                    },
+                    "onset": {
+                        "id": "HP:0003577",
+                        "label": "Congenital onset"
+                    },
+                    "evidence": {
+                        "reference": {
+                            "id": "PMID:30962759",
+                            "description": "Recurrent Erythema Nodosum in a Child with a SHOC2 Gene Mutation"
+                        },
+                        "evidence_code": {
+                            "id": "ECO:0006017",
+                            "label": "author statement from published clinical study used in manual assertion"
+                        }
+                    },
+                    "negated": True,
+                    "modifier": [
+                        {
+                            "id": "HP: 0012825 ",
+                            "label": "Mild"
+                        },
+                        {
+                            "id": "HP: 0012823 ",
+                            "label": "Semi-mild"
+                        }
+                    ],
+                }
+                ind_phenopacket["biosamples"][0]["phenotypic_features"].append(phenotypic_feature)
+                ind_phenopacket["genes"] = [
+                    {
+                        "id": "HGNC:2621",
+                        "symbol": "CYP2C19"
+                    }
+                ]
+                ind_phenopacket["variants"] = [
+                    {
+                        "id": 1,
+                        "zygosity": {
+                            "id": "GENO:0000135",
+                            "label": "heterozygous"
+                        },
+                        "allele_type": "spdiAllele",
+                        "allele": {
+                            "id": "clinvar:13294",
+                            "seq_id": "NC_000010.10",
+                            "position": 123256214,
+                            "deleted_sequence": "T",
+                            "inserted_sequence": "G"
+                        }
+                    }
+                ]
+                ind_phenopacket["hts_files"] = [
+                    {
+                        "uri": "https://data.example/genomes/germline_wgs.vcf.gz",
+                        "description": "Matched normal germline sample",
+                        "hts_format": "VCF",
+                        "genome_assembly": "GRCh38",
+                        "individual_to_sample_identifiers": {
+                            "patient:1": "NA12345"
+                        }
+                    },
+                    {
+                        "uri": "https://data.example/genomes/test2",
+                        "description": "Matched normal germline sample",
+                        "hts_format": "VCF",
+                        "genome_assembly": "GRCh38",
+                        "individual_to_sample_identifiers": {
+                            "NA19648": "NA19648"
                         }
                     }
                 ]
