@@ -53,7 +53,7 @@ def main():
                     "submitted_by": "Ksenia Zaytseva",
                     "resources": [
                         {
-                            "id": "ncbi_taxonomy",
+                            "id": "NCBITaxon:2018-07-27",
                             "name": "NCBI Taxonomy OBO Edition",
                             "namespace_prefix": "NCBITaxon",
                             "url": "http://purl.obolibrary.org/obo/ncbitaxon.owl",
@@ -61,7 +61,7 @@ def main():
                             "iri_prefix": "http://purl.obolibrary.org/obo/NCBITaxon_"
                         },
                         {
-                            "id": "uberon",
+                            "id": "UBERON:2019-06-27",
                             "name": "Uber-anatomy ontology",
                             "namespace_prefix": "UBERON",
                             "url": "http://purl.obolibrary.org/obo/uberon.owl",
@@ -69,7 +69,7 @@ def main():
                             "iri_prefix": "http://purl.obolibrary.org/obo/UBERON"
                         },
                         {
-                            "id": "nci_thesaurus",
+                            "id": "NCIT:2015-09-01",
                             "name": "NCI Thesaurus",
                             "namespace_prefix": "NCIT",
                             "url": "https://ncit.nci.nih.gov",
@@ -86,7 +86,7 @@ def main():
                         "individual_id": individual_id,  # TODO: Do we need to provide this?
                         "description": f"Biosample for patient {s}",
                         "sampled_tissue": {
-                            "id": "UBERON_0000178",
+                            "id": "UBERON:0000178",
                             "label": "blood"
                         },
                         "phenotypic_features": [],  # TODO
@@ -98,7 +98,7 @@ def main():
                         "diagnostic_markers": [],  # TODO
                         "procedure": {
                             "code": {
-                                "id": "NCIT_C15189",
+                                "id": "NCIT:C15189",
                                 "label": "Biopsy"
                             }
                         },
